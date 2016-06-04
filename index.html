@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Speech4All</title>
+
+    <style>
+    ul {
+      list-style: none;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Space Hack Demo</h1>
+    <hr>
+    <h3>Speaker said:</h3>
+    <ul id="speaker-messages">
+        <li></li>
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    var socket = io();
+    socket.on('new text', function(data) {
+        var node = document.createElement("LI"); // Create a <li> node
+        var d = new Date();
+        var textnode = document.createTextNode('[' + d.toISOString() +  ']: ' + data); // Create a text node
+        node.appendChild(textnode); // Append the text to <li>
+        document.getElementById("speaker-messages").appendChild(node); // Append <li> to <ul> with id="myList"
+    });
+    </script>
+</body>
+
+</html>
