@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "node-record-lpcm16": "^0.1.4",
+    "node-record-lpcm16": "https://github.com/speech4all/node-record-lpcm16/tarball/master",
     "socket.io": "^1.4.6",
     "watson-developer-cloud": "^1.9.3"
   }

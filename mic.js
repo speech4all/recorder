@@ -1,5 +1,5 @@
 // MICROPHONE
-var mic = require('mic');
+var rec = require('node-record-lpcm16');
 // WATSON
 var watson = require('watson-developer-cloud');
 // SERVER
@@ -36,7 +36,7 @@ var speech_to_text = watson.speech_to_text({
 var params = {
   content_type: 'audio/wav',
   continuous: true,
-  interim_results: false,
+  interim_results: true,
   model: 'es-ES_BroadbandModel'
 };
 
@@ -46,12 +46,12 @@ var recognizeStream = speech_to_text.createRecognizeStream(params);
 // Pipe in some audio.
 console.log('Starting now... TALK! :)');
 //sound.record().pipe(recognizeStream);
-var micInstance = mic({ 'rate': '16000', 'channels': '1', 'debug': false, 'exitOnSilence': 6 });
-var micInputStream = micInstance.getAudioStream();
- 
-micInputStream.pipe(recognizeStream);
-
-micInstance.start();
+rec.start({
+  sampleRate : 16000,
+  threshold: 0.5,
+  verbose : true,
+  exitOnSilence: '30.0' //seconds
+}).pipe(recognizeStream);
 
 // Get strings instead of buffers from `data` events.
 recognizeStream.setEncoding('utf8');
