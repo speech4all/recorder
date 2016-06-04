@@ -36,7 +36,7 @@ var speech_to_text = watson.speech_to_text({
 var params = {
   content_type: 'audio/wav',
   continuous: true,
-  interim_results: true,
+  interim_results: false,
   model: 'es-ES_BroadbandModel'
 };
 
